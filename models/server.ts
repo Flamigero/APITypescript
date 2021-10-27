@@ -1,12 +1,13 @@
 import express, {Application} from 'express';
 import cors from 'cors';
 import db from '../database/config';
+import cityRouter from '../routes/city';
 
 class Server {
     private app: Application;
     private port: string;
     private apiPaths = {
-
+        city: '/api/city',
     }
 
     constructor() {
@@ -18,6 +19,9 @@ class Server {
 
         // Init middlewares
         this.middlewares();
+
+        // Init routes
+        this.routes();
     }
 
     async connectDatabase() {
@@ -39,6 +43,11 @@ class Server {
 
         // Públic content
         this.app.use(express.static('public'));
+    }
+
+    // API Routes
+    routes() {
+        this.app.use(this.apiPaths.city, cityRouter);
     }
 
     listen() {
