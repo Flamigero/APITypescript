@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { createCity, getCities, getCity } from '../controllers/city';
+import { createCity, deleteCity, getCities, getCity, updateCity } from '../controllers/city';
 import { cityExist } from '../helpers/dbValidators';
 import validateFields from '../middlewares/validateFields';
 
@@ -11,11 +11,22 @@ cityRouter.get('/', getCities);
 cityRouter.get('/:id', [
     check('id').custom(cityExist),
     validateFields
-],getCity)
+],getCity);
 
 cityRouter.post('/', [
     check('city', 'City is mandatory').notEmpty(),
     validateFields
-], createCity)
+], createCity);
+
+cityRouter.put('/:id', [
+    check('city', 'City is mandatory').notEmpty(),
+    check('id').custom(cityExist),
+    validateFields
+], updateCity);
+
+cityRouter.delete('/:id', [
+    check('id').custom(cityExist),
+    validateFields
+], deleteCity)
 
 export default cityRouter;
