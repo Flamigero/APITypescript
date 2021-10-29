@@ -11,5 +11,8 @@ lerna-debug.log*
 node_modules/
 dist/
 
-# dotenv environment variables file
+# Dotenv environment variables file
 .env
+
+# Test
+coverage/

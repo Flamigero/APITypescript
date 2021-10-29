@@ -4,7 +4,7 @@ import db from '../database/config';
 import cityRouter from '../routes/city';
 
 class Server {
-    private app: Application;
+    public app: Application;
     private port: string;
     private apiPaths = {
         city: '/api/city',
